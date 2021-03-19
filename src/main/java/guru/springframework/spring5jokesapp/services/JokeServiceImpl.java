@@ -6,9 +6,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class JokeServiceImpl implements JokeService {
 
-    private ChuckNorrisQuotes quotes = new ChuckNorrisQuotes();
+    // Normally we'll make this 3rd party guy a Spring managed component (bean)
+    private final ChuckNorrisQuotes quotes;
 
-    public String getJoke(){
+    public JokeServiceImpl() {
+        this.quotes = new ChuckNorrisQuotes();
+    }
+
+    @Override
+    public String getJoke() {
         return quotes.getRandomQuote();
     }
 }
